@@ -3,6 +3,12 @@
     font-family: "Balsamiq Sans", sans-serif;
   font-weight: 400;
   font-style: normal;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+ }
+ .container{
+    flex:1;
  }
  .navbar{
   height:5rem;  
@@ -88,4 +94,9 @@ opacity: 0;
 .card-img-overlay:hover{
     opacity: 0.2;
     background-color: #222222;
+}
+/* edit */
+.edit-btn{
+    background-color: red !important;
+    border:none;
 }
