@@ -3,17 +3,17 @@
     <h3>create a new listing </h3>
     <div class="row">
       <div class="col-8 offset- 2 ">
-    <form action="/listings" method="POST">
+    <form action="/listings" method="POST" novalidate class="needs-validation">
 
    <div class="mb-3">
      <label for="title" class="form-label">Title</label><br>
     <input type="text" name="title" placeholder="Enter title" required class="form-control"><br><br>
-
+<div class="valid-feedback">title looks good </div>
    </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label><br>
-    <textarea name="description" placeholder="Enter description" class="form-control"></textarea><br><br>
-
+    <textarea name="description" placeholder="Enter description" required class="form-control"></textarea><br><br>
+<div class="invalid-feedback">please enter description</div>
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Image URL</label><br>
@@ -23,19 +23,19 @@
   <div class="row">
      <div class="mb-3 col-md-4">
      <label for="price" class="form-label">Price</label><br>
-    <input type="number" name="price" placeholder="Enter price" class="form-control"><br><br>
-
+    <input type="number" name="price" placeholder="Enter price" class="form-control" required><br><br>
+<div class="invalid-feedback">enter the price money </div>
    </div>
     <div class="mb-3 col-md-4">
       <label for="location" class="form-label">Location</label><br>
-    <input type="text" name="location" placeholder="Enter location" class="form-control"><br><br>
-
+    <input type="text" name="location" placeholder="Enter location" class="form-control" required><br><br>
+<div class="invalid-feedback">enter the location </div>
     </div>
   </div>
    <div class="mb-3">
      <label for="country" class="form-label">Country</label><br>
-    <input type="text" name="country" placeholder="Enter country" class="form-control"><br><br>
-
+    <input type="text" name="country" placeholder="Enter country" class="form-control" required><br><br>
+<div class="invalid-feedback">enter the country </div>
    </div>
     <button class="btn btn-dark" type="submit">Create Listing</button>
 

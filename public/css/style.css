@@ -97,6 +97,12 @@ opacity: 0;
 }
 /* edit */
 .edit-btn{
-    background-color: red !important;
+    background-color: rgb(179, 45, 45) !important;
     border:none;
 }
+/* show */
+
+.show-img{
+height:30vh;
+}
+

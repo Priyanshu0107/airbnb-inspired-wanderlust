@@ -5,6 +5,9 @@ const Listing=require("./models/listing.js");
 const path=require("path");
 const methodOverride=require("method-override")
 const ejsMate=require("ejs-mate")
+const wrapAsync = require("./utlis/wrapAsync");
+
+const ExpressError=require("./utlis/ExpressError.js")
 mongoose.connect("mongodb://127.0.0.1:27017/wanderlust")
 .then(()=>{
     console.log("mongo connected");
@@ -57,8 +60,10 @@ let {id}=req.params;
   const listing= await Listing.findById(id);
   res.render("listings/show",{listing})
 })
-app.post("/listings",async(req,res)=>{
-    try {
+
+app.post(
+  "/listings",
+  wrapAsync(async (req, res) => {
     let { title, description, image, price, country, location } = req.body;
 
     const newListing = new Listing({
@@ -67,18 +72,15 @@ app.post("/listings",async(req,res)=>{
       image,
       price,
       country,
-      location
+      location,
     });
 
     await newListing.save();
 
-    res.redirect("/listings"); // or res.send("Listing Created")
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Error creating listing");
-  }
+    res.redirect("/listings");
+  })
+);
 
-})
 app.get("/listings/:id/edit",async (req,res)=>{
     let {id}=req.params;
   const listing= await Listing.findById(id);
@@ -95,6 +97,16 @@ app.post("/listings/:id", async(req,res)=>{
     console.log(del);
     res.redirect("/listings");
 })
+// 404 handler (NO PATH)
+app.use((req, res, next) => {
+  next(new ExpressError(404, "Page Not Found"));
+});
+
+app.use((err, req, res, next) => {
+let {statusCode,message}=err;
+res.status(statusCode).send(message);
+});
+
 app.listen(9002,()=>{
     console.log("the port is lsiten ");
 })  
